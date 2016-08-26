@@ -1,0 +1,95 @@
+   Activiti 工作流  第一天  
+                                
+一、工作流概念
+   oa系统、电子政务   经常采用工作流
+ 1. 生活中的工作流
+   
+ 2. 理解工作流概念
+   - 定义工作流 ： 包括定义具体的活动、规则等
+   - 执行工作流 ： 按照流程定义的规则去执行，并且由多个参与者进行控制 
+ 3. 华谊请假工作流系统演示 ：采用Activiti工作流
+  web包  解压 
+二、Activiti工作流
+    常见开源工作流引擎框架 ： OSWorkFlow、jBPM（jboss business process management）
+                          Activiti工作流（是对jBPM升级）
+
+ 1. Activiti工作流介绍  
+    1. 工作流引擎 ：ProcessEngine ，它是Activiti的核心类，由该类可以获取其他的服务实例
+                 （历史服务、仓库服务、任务服务、用户参与者服务）
+    2. BPMN  ：UML ：用例图、类图、时序图 
+       业务流程建模与标注（Business Process Model and Notation，BPMN) ，
+       描述流程的基本符号，包括这些图元如何组合成一个业务流程图（Business Process Diagram）
+    3. 数据库 
+       Activiti的后台是有数据库的支持，所有的表都以ACT_开头。
+       第二部分是表示表的用途的两个字母标识。 用途也和服务的API对应
+       Activiti的工作流数据库有23张表    
+         要保存流程定义 
+        - act_ge_*  ：通用表
+        - act_hi_*  ：历史流程相关表 
+        - act_re_*  ：仓库表：保存流程定义
+        - act_ru_*  ：保存流程运行相关的表  
+        - act_id_*  ：用户参与相关的表  
+    4. activiti.cfg.xml  
+        Activiti核心配置文件，配置流程引擎创建工具的基本参数和数据库连接参数
+    5. logging.properties    ：log4j    
+ 2. 搭建Activiti开发环境
+    1. Acitiviti软件环境
+      * JDK ,1.6版本及以上
+      * 数据库 支持的有：h2\mysql\oracle\mssql\db2等 ，选择mysql
+      * 支持Activiti 5 运行的jar包 ，在activiti-5.13\wars\activiti-rest \WEB-INF\lib添加 ，
+        可以在官网下载：www.activiti.org 
+      * 集成开发环境：Myeclipse 8.6及以上  最好 myeclipse 2014 
+    2. 安装流程设计器  bpmn ：业务流程建模与标注（Business Process Model and Notation，BPMN)
+      * 有网络安装  
+      * 无网情况   :直接添加插件 
+         把压缩包中的内容放入eclipse根目录的dropins文件夹下
+	   
+      * 注意：打开菜单Windows->Preferences->Activiti->Save actions
+           把*bpmn 和*.png同步保存
+ 3. Activiti 架构及核心API
+  -  activiti.cfg.xml
+  -  ProcessEngineConfigration
+  -  ProcessEngine
+  - RepositoryService
+  - TaskService
+  - IdentityService
+  - FormService 
+  - RuntimeService
+  - ManagementService
+  - HistoryService
+三、HelloActiviti程序（模拟Activiti流程执行）
+ 
+  1. 设置流程定义图bpmn
+     assignee :代理人、指定人、处理人
+  2. 创建流程引擎及工作流数据表
+     - 数据库及表可以自动创建，
+       可以在配置数据库连接时，实现自动创建数据库和表
+     - 取得ProcessEngine对象
+       先取得ProcessEngineConfiguration 对象 ，再由该对象来构建ProcessEngine
+
+      
+  3. 部署流程
+      影响的表：
+        act_re_procdef ：流程定义表 ：
+	  该表的key属性 是bpmn 的 id决定  
+	  该表的name属性  是bpmn 的name 属性决定
+	act_re_deployment：部署表 ：id是由act_ge_property的 next_dbid决定
+	act_ge_property ：通用属性表
+  4. 启动流程
+  5. 查看我的个人任务
+  6. 完成我的个人任务
+
+jbpm (jboss business process managerment) jboss公司开发的业务流程管理框架
+
+
+练习：
+  1. 创建一个 Activiti project
+  2. 创建lib 文件夹 ，添加 activiti jar包 
+   ，并且builder path
+  3. 在src/main/resources/diagrams 目录下
+    创建一个bpmn 流程定义图
+     - 设置 流程定义图的id(leaveBill)
+        和name(leaveProcess)
+     - 设置每一个任务的name
+     - 设置每一个任务的assignee(任务的办理人)
+       张三、李四、王五

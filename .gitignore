@@ -1,0 +1,6 @@
+*.class
+*.MF
+*.war
+*.ear
+/target
+/.settings

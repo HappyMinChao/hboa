@@ -1,0 +1,18 @@
+﻿hboa 业务流系统
+ 1.采用JEE平台S2SH框架
+ 2.业务流程采用Activiti框架
+ 3.数据库 ：mysql5.0及以上  用户名 ：root 密码：1234  ，数据库及数据表会自动创建
+            在db.properties 文件中改用户名和密码
+ 4.容器 建议采用Tomcat 7.0  JDK 要在 1.6 版本以上，建议 1.7
+ 5.a_employee_insert.sql 文件
+   第一次启动系统，登录不成功，需要对数据表a_employee 插入初始数据 ，数据内容按照
+   a_employee_insert.sql 脚本 录入
+ 6.leaveBill.zip ：请假流程定义文件
+   进入系统后，操作流程如下:
+    1. 登录--》流程管理--》部署管理--》选择文件(leaveBill.zip)，上传流程
+    2. 业务管理--》请假管理--》添加请假申请
+ 7. 假如有spring的配置文件保存，请联网，自动下载xsd文件
+    假如struts2配置文件中，提示出这个action ${nextDispose} cannot be found in the namespace
+    设置 ：Window-->Preference-->Myeclipse -->Validation -->去掉struts2 Validator后的Build列的 √
+    
+   
